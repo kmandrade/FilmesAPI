@@ -8,6 +8,8 @@ namespace FilmesAPI.Models
 {
     public class Filme
     {
+        public int _id { get; set; }
+
         [Required (ErrorMessage ="O titulo do filme é obrigatorio")] //determimna que é necessário essa informacao
         public string titulo { get; set; }
         public string diretor { get; set; }
