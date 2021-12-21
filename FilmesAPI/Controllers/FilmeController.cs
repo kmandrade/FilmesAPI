@@ -69,6 +69,40 @@ namespace FilmesAPI.Controllers
             //return null;
 
         }
+        [HttpPut("{id}")]//parametro para pegar o id pelo header
+        public IActionResult AtualizarFilme(int id, [FromBody] Filme filmeNovo)
+        {
+            Filme filme = _context.Filmes.FirstOrDefault(filme => filme._id == id); //recupera a info do filme
+
+            if (filme == null)
+            {
+                return NotFound();
+            }
+            filme.titulo = filmeNovo.titulo;
+            filme.genero = filmeNovo.genero;
+            filme.duracao = filmeNovo.duracao;
+            filme.diretor = filmeNovo.diretor;
+
+            
+            return Ok(filme);
+               
+            
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeletarFilme(int id)
+        {
+            Filme filme = _context.Filmes.FirstOrDefault(filme => filme._id == id); //recupera a info do filme
+            if (filme == null)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(filme);
+            _context.SaveChanges();
+            return NoContent();
+        }
+        
+       
 
     }
 }
